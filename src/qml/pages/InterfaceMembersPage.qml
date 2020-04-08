@@ -1,11 +1,11 @@
 import QtQuick 2.2
-import Sailfish.Silica 1.0
+import QtQuick.Controls 2.0
 import harbour.visual.dbus.dbusinspector 1.0
 import harbour.visual.dbus.interfacemember 1.0
 import harbour.visual.dbus.argument 1.0
 
 Page {
-    property alias serviceName: header.title
+    property string serviceName: ""
     property string servicePath: value
     property string serviceInterface: value
     property bool isSystemBus: true
@@ -14,17 +14,17 @@ Page {
         id: dbusInspector
     }
 
-    PageHeader {
+    /*PageHeader {
         id: header
         anchors.top: parent.top
-    }
+    }*/
 
     Label {
         id: currentPath
         text: 'Path: ' + servicePath
         font.pixelSize: Theme.fontSizeLarge
         anchors {
-            top: header.bottom
+            top: parent.top
             left: parent.left
             leftMargin: Theme.horizontalPageMargin
             right: parent.right
@@ -66,7 +66,7 @@ Page {
         }
     }
 
-    SilicaListView {
+    ListView {
         id: membersListView
         anchors {
             top: separator.bottom
@@ -77,10 +77,11 @@ Page {
         clip: true
         spacing: 0
         model: dbusInspector.getInterfaceMembers(serviceName, servicePath, serviceInterface, isSystemBus)
-        delegate: ListItem {
+        delegate: MouseArea {
             id: listItem
-            height: label.contentHeight + Theme.paddingLarge
-            contentHeight: label.contentHeight + Theme.paddingLarge
+            width: parent.width
+            height: label.contentHeight
+            //contentHeight: label.contentHeight + Theme.paddingLarge
             Label {
                 id: label
                 text: modelDataToString(modelData)
@@ -95,11 +96,11 @@ Page {
             }
             onClicked: {
                 if (modelData.kind === "method")
-                    pageStack.push(Qt.resolvedUrl("MethodCallPage.qml"), { "serviceName": serviceName,
+                    pageStack.push("qrc:/qml/pages/MethodCallPage.qml", { "serviceName": serviceName,
                                        "servicePath": servicePath, "interfaceName": serviceInterface,
                                        "method": modelData, "isSystemBus": isSystemBus});
                 else if (modelData.kind === "property")
-                    pageStack.push(Qt.resolvedUrl("PropertyPage.qml"), { "serviceName": serviceName,
+                    pageStack.push("qrc:/qml/pages/PropertyPage.qml", { "serviceName": serviceName,
                                        "servicePath": servicePath, "interfaceName": serviceInterface,
                                        "property": modelData, "isSystemBus": isSystemBus});
             }
@@ -107,7 +108,7 @@ Page {
         section {
             property: "modelData.kind"
             criteria: ViewSection.FullString
-            delegate: SectionHeader {
+            delegate: Label {
                 text: section
             }
         }

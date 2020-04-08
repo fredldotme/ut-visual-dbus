@@ -1,9 +1,9 @@
 import QtQuick 2.2
-import Sailfish.Silica 1.0
+import QtQuick.Controls 2.0
 import harbour.visual.dbus.dbusinspector 1.0
 
 Page {
-    property alias serviceName: header.title
+    property string serviceName: ""
     property string servicePath: value
     property bool isSystemBus: true
 
@@ -11,17 +11,17 @@ Page {
         id: dbusInspector
     }
 
-    PageHeader {
+    /*PageHeader {
         id: header
         anchors.top: parent.top
-    }
+    }*/
 
     Label {
         id: currentPath
         text: 'Path: ' + servicePath
         font.pixelSize: Theme.fontSizeLarge
         anchors {
-            top: header.bottom
+            top: parent.top
             left: parent.left
             leftMargin: Theme.horizontalPageMargin
             right: parent.right
@@ -55,7 +55,7 @@ Page {
         wrapMode: Text.Wrap
     }
 
-    SilicaListView {
+    ListView {
         id: interfacesListView
         anchors {
             top: listHeader.bottom
@@ -64,21 +64,24 @@ Page {
             bottom: parent.bottom
         }
         model: dbusInspector.getInterfacesList(serviceName, servicePath, isSystemBus)
-        delegate: ListItem {
+        delegate: MouseArea {
             id: listItem
-            contentHeight: Theme.itemSizeSmall
+            width: parent.width
+            height: label.contentHeight
             Label {
+                id: label
                 text: modelData
                 anchors {
                     fill: parent
                     margins: Theme.horizontalPageMargin * 1.5
                 }
+                font.pixelSize: appWindow.fontSizeMedium
                 wrapMode: Text.Wrap
                 verticalAlignment: Text.AlignVCenter
                 color: listItem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
             onClicked: {
-                pageStack.push(Qt.resolvedUrl("InterfaceMembersPage.qml"),
+                pageStack.push("qrc:/qml/pages/InterfaceMembersPage.qml",
                                {"serviceName": serviceName, "servicePath": servicePath,
                                    "serviceInterface": modelData, "isSystemBus": isSystemBus});
             }

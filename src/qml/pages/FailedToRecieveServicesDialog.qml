@@ -1,30 +1,26 @@
 import QtQuick 2.2
-import Sailfish.Silica 1.0
+import QtQuick.Controls 2.2
 
 Dialog {
 
     Column {
         width: parent.width
 
-        DialogHeader {
+        /*DialogHeader {
             acceptText: qsTr("Try again")
             cancelText: qsTr("Close")
-        }
+        }*/
 
         Label {
-            font.weight: Theme.fontSizeLarge
+            //font.weight: Theme.fontSizeLarge
             width: parent.width
             wrapMode: Text.WordWrap
             text: qsTr("Failed to recieve list of services. You can try again or close the application.")
         }
     }
-
-    onDone: {
-        if(result === DialogResult.Accepted) {
-            pageStack.clear();
-            pageStack.push(Qt.resolvedUrl("MainPage.qml"));
-        } else {
-            Qt.quit();
-        }
+    onRejected: Qt.quit();
+    onAccepted: {
+        pageStack.clear();
+        pageStack.push("qrc:/qml/pages/MainPage.qml");
     }
 }

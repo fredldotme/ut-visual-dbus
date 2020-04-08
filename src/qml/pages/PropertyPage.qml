@@ -1,10 +1,10 @@
 import QtQuick 2.2
-import Sailfish.Silica 1.0
+import QtQuick.Controls 2.0
 import harbour.visual.dbus.dbusinspector 1.0
 import harbour.visual.dbus.interfacemember 1.0
 
 Page {
-    property alias serviceName: header.title
+    property string serviceName: ""
     property string servicePath: value
     property string interfaceName: value
     property InterfaceMember property: value
@@ -14,14 +14,14 @@ Page {
         id: dbusInspector
     }
 
-    PageHeader {
+    /*PageHeader {
         id: header
         anchors.top: parent.top
-    }
+    }*/
 
-    SilicaFlickable {
+    Flickable {
         anchors {
-            top: header.bottom
+            top: parent.top
             left: parent.left
             right: parent.right
             bottom: parent.bottom
@@ -108,6 +108,6 @@ Page {
                 }
             }
         }
-        VerticalScrollDecorator { }
+        //VerticalScrollDecorator { }
     }
 }

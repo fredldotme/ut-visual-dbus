@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/ut-visual-dbus.qml</file>
+        <file>qml/pages/FailedToRecieveServicesDialog.qml</file>
+        <file>qml/pages/InterfaceMembersPage.qml</file>
+        <file>qml/pages/MainPage.qml</file>
+        <file>qml/pages/MethodCallPage.qml</file>
+        <file>qml/pages/PropertyPage.qml</file>
+        <file>qml/pages/ServiceInterfacesListPage.qml</file>
+        <file>qml/pages/ServicePathsListPage.qml</file>
+    </qresource>
+</RCC>

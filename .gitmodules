@@ -1,0 +1,3 @@
+[submodule "dbus"]
+	path = dbus
+	url = https://git.sailfishos.org/mer-core/nemo-qml-plugin-dbus.git

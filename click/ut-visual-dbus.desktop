@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Icon=ut-visual-dbus.png
+Exec=run.sh
+Name=Visual D-Bus
+X-Ubuntu-Touch=true
+X-Ubuntu-Splash-Color=#F5F5F5
