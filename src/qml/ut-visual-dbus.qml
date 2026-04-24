@@ -15,7 +15,7 @@ ApplicationWindow
             ToolButton {
                 text: qsTr("‹")
                 onClicked: pageStack.pop()
-                enabled: pageStack.depth > 0
+                enabled: pageStack.depth > 1
             }
             Label {
                 text: pageStack.currentItem.title

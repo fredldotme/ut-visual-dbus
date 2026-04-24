@@ -4,7 +4,7 @@
     "version": "0.2",
     "description": "A visual D-Bus service viewer",
     "architecture": "@CLICK_ARCH@",
-    "framework": "ubuntu-sdk-16.04",
+    "framework": "ubuntu-touch-24.04-1.x",
     "maintainer": "Alfred Neumayer <dev.beidl@gmail.com>",
     "hooks": {
         "ut-visual-dbus": {
